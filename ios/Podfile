@@ -15,6 +15,7 @@ if linkage != nil
 end
 
 target 'runspire' do
+  project './runspire.xcodeproj'
   config = use_native_modules!
 
   use_react_native!(

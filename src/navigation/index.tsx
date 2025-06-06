@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Splash from '../screens/splash/Splash';
-import Home from '../screens/HomeScreen/Home';
+import Home from '../screens/homeScreen/Home';
 import {RootStackParamList} from './RouterParam';
 
 export default function AppNavigator() {

@@ -1,4 +1,4 @@
-import tw from '../utils/tailwind';
+import tw from '@utils/tailwind';
 
 export const commonStyles = {
   card: tw.style('bg-white rounded-lg p-4 shadow-md'),
