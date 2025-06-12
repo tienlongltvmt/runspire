@@ -4,12 +4,17 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Splash from '../screens/splash/Splash';
 import Home from '../screens/homeScreen/Home';
 import {RootStackParamList} from './RouterParam';
+import Login from '@screens/auth/Login';
+import {navigationRef} from './NavigationService';
 
 export default function AppNavigator() {
   // Sử dụng generic type với Stack Navigator
   const RootStack = createNativeStackNavigator<RootStackParamList>();
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() => console.log('Navigation is ready')}
+      onStateChange={state => console.log('New navigation state', state)}>
       <RootStack.Navigator
         initialRouteName="Splash"
         screenOptions={{
@@ -20,6 +25,13 @@ export default function AppNavigator() {
         <RootStack.Screen
           name="Splash"
           component={Splash}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <RootStack.Screen
+          name="Login"
+          component={Login}
           options={{
             headerShown: false,
           }}

@@ -1,79 +1,95 @@
-// SplashScreen.tsx
-
+import {MyText} from '@components/textview/MyText';
+import {useNavigation} from '@react-navigation/core';
 import tw from '@utils/tailwind';
 import React, {useEffect} from 'react';
-import {Animated, Dimensions, StyleSheet, View} from 'react-native';
+import {ImageBackground, TouchableOpacity, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import auth from '@react-native-firebase/auth';
+import NavigationService from '@navigation/NavigationService';
 
-const {width, height} = Dimensions.get('window');
-
-// Số lượng icon rơi
-const NUMBER_OF_ICONS = 10;
-
-const Splash = () => {
-  const icons = React.useRef(
-    Array.from({length: NUMBER_OF_ICONS}).map(() => ({
-      x: Math.random() * (width - 50), // Random vị trí ngang
-      animation: new Animated.Value(-50), // Bắt đầu ở trên ngoài màn hình
-      duration: 2000 + Math.random() * 2000, // Random thời gian rơi
-    })),
-  ).current;
+const RunningCommunityScreen = () => {
+  const navigation = useNavigation();
 
   useEffect(() => {
-    icons.forEach(icon => {
-      Animated.timing(icon.animation, {
-        toValue: height - 80, // điểm gần chạm bao
-        duration: icon.duration,
-        useNativeDriver: true,
-      }).start();
-    });
-  }, [icons]);
+    const timer = setTimeout(() => {
+      const user = auth().currentUser;
+      // NavigationService.replace('Login');
+      if (user) {
+        NavigationService.replace('Home');
+      } else {
+        NavigationService.replace('Login');
+      }
+    }, 1500); // giả delay như splash animation
 
+    return () => clearTimeout(timer);
+  }, []);
+  console.log('RunningCommunityScreen loaded');
   return (
-    <View style={styles.container}>
-      {icons.map((icon, index) => (
-        <Animated.View
-          key={index}
-          style={[
-            styles.icon,
-            {
-              transform: [{translateY: icon.animation}],
-              left: icon.x,
-            },
-          ]}>
-          <View style={tw.style('w-2 h-2 rounded-full bg-red-200')} />
-        </Animated.View>
-      ))}
+    <View style={tw.style('flex-1 bg-black')}>
+      <ImageBackground
+        source={{
+          uri: 'https://i.pinimg.com/736x/f7/2a/fc/f72afc870c34d616507c5dfd5503dea1.jpg',
+        }}
+        style={tw.style('flex-1 items-center justify-end')}
+        resizeMode="cover">
+        <LinearGradient
+          colors={[
+            'rgba(15,23,42,1)',
+            'rgba(0,0,0,0.7)',
+            'rgba(194,65,12 ,0.6)',
+          ]}
+          start={{x: 0.6, y: 0.6}}
+          end={{x: 1, y: 1}}
+          style={tw.style('rounded-2xl m-4')}>
+          <View style={tw.style('rounded-lg p-6 bg-black/50')}>
+            <MyText
+              style={tw.style(
+                'text-white text-2xl font-bold text-center mb-5 shadow-lg',
+              )}>
+              Connect with a Community of Runners
+            </MyText>
 
-      <View
-        style={tw.style(
-          'w-full h-20 rounded-full bg-red-200 absolute bottom-3',
-        )}
-      />
+            <MyText
+              style={tw.style(
+                'text-white/90 text-base text-center leading-7 mb-8',
+              )}>
+              Join a global network of runners and share your achievements.
+              Challenge friends, participate in virtual races, and celebrate
+              your progress together.
+            </MyText>
+
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={tw.style(
+                'bg-orange-500 py-3 rounded-full items-center mb-6 shadow-lg',
+              )}>
+              <MyText style={tw.style('text-white text-lg font-semibold')}>
+                Get Started
+              </MyText>
+            </TouchableOpacity>
+
+            <View style={tw.style('flex-row justify-center items-center')}>
+              <MyText style={tw.style('text-white/70 text-base')}>
+                Already Have an account?
+              </MyText>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => {
+                  navigation.navigate('Login'); // Navigate to Login screen
+                }}>
+                <MyText
+                  style={tw.style(
+                    'text-orange-500 text-base font-semibold underline ml-1',
+                  )}>
+                  Login
+                </MyText>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </LinearGradient>
+      </ImageBackground>
     </View>
   );
 };
 
-export default Splash;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f0f8ff', // màu nền nhẹ nhàng
-  },
-  icon: {
-    position: 'absolute',
-    width: 40,
-    height: 40,
-  },
-  iconImage: {
-    width: '100%',
-    height: '100%',
-  },
-  bag: {
-    position: 'absolute',
-    bottom: 10,
-    alignSelf: 'center',
-    width: 120,
-    height: 80,
-  },
-});
+export default RunningCommunityScreen;

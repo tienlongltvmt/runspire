@@ -8,6 +8,10 @@ require Pod::Executable.execute_command('node', ['-p',
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
+#remove global `use_modular_headers`
+#use_modular_headers!
+use_frameworks! :linkage => :static
+
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
@@ -17,7 +21,7 @@ end
 target 'runspire' do
   project './runspire.xcodeproj'
   config = use_native_modules!
-
+  
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "48532360353",
+    "project_id": "runspire-app",
+    "storage_bucket": "runspire-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48532360353:android:6299596a9611b60c98b4e0",
+        "android_client_info": {
+          "package_name": "com.runspire"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48532360353-rkb7vr2a70m6ccaud9fnv7bt2u9astj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8HTXG5UIg_tBp6D6OrXdrH5rbQCycGf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48532360353-rkb7vr2a70m6ccaud9fnv7bt2u9astj3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "48532360353-m2s714jgq46e7q3r0ppvi0aun13lgd7j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.runspire"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
