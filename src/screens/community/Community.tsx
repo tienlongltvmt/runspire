@@ -45,28 +45,6 @@ const Community = () => {
     fetchPosts();
   }, []);
 
-  const handleLike = async (post: Post) => {
-    const userId = auth().currentUser?.uid;
-    if (!userId) {
-      return Alert.alert('Bạn cần đăng nhập');
-    }
-
-    const postRef = firestore().collection('posts').doc(post.id);
-    const alreadyLiked = post.likes?.includes(userId);
-
-    try {
-      await postRef.update({
-        likes: alreadyLiked
-          ? firestore.FieldValue.arrayRemove(userId)
-          : firestore.FieldValue.arrayUnion(userId),
-      });
-
-      fetchPosts(); // refresh after like
-    } catch (err) {
-      console.log('Lỗi khi like:', err);
-    }
-  };
-
   const handleCreatedPostCommunity = () => {
     NavigationService.navigate('CreatedPostCommunity');
   };
@@ -81,9 +59,7 @@ const Community = () => {
         <FlatList
           data={posts}
           keyExtractor={item => item.id}
-          renderItem={({item}: {item: Post}) => (
-            <PostCard post={item} onLikePress={handleLike} />
-          )}
+          renderItem={({item}: {item: Post}) => <PostCard post={item} />}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={fetchPosts} />
           }

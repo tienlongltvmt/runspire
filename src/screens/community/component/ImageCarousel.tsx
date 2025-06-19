@@ -13,7 +13,7 @@ import Animated, {
   useDerivedValue,
 } from 'react-native-reanimated';
 import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+import {getAuth} from '@react-native-firebase/auth';
 import tw from '@utils/tailwind';
 import {MyIcon} from '@components/icon/MyIcon';
 
@@ -118,7 +118,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
   };
 
   const handleDoubleTap = async () => {
-    const userId = auth().currentUser?.uid;
+    const auth = getAuth();
+    const userId = auth.currentUser?.uid;
     if (!userId || !postId) {
       return;
     }

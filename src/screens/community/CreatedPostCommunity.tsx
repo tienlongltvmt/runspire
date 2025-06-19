@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+import {getAuth} from '@react-native-firebase/auth';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {MyIcon} from '@components/icon/MyIcon';
 import {MyText} from '@components/textview/MyText';
@@ -26,7 +26,8 @@ const CreatedPostCommunity = () => {
     if (images.length > 0) {
       urls = await Promise.all(images.map(img => uploadToCloudinary(img)));
     }
-    const user = auth().currentUser;
+    const auth = getAuth();
+    const user = auth.currentUser;
     if (!user || !caption || !urls.length) {
       return Alert.alert('Vui lòng điền đủ nội dung và hình ảnh');
     }
