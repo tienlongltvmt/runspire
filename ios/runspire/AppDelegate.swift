@@ -7,6 +7,7 @@ import ReactAppDependencyProvider
 import FBSDKCoreKit
 import GoogleSignIn
 import Firebase
+import GoogleMaps
 
 @main
 class AppDelegate: RCTAppDelegate {

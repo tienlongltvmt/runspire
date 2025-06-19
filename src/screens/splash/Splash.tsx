@@ -4,26 +4,25 @@ import tw from '@utils/tailwind';
 import React, {useEffect} from 'react';
 import {ImageBackground, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import auth from '@react-native-firebase/auth';
 import NavigationService from '@navigation/NavigationService';
+import {useUserStore} from '@store/userStore';
 
 const RunningCommunityScreen = () => {
   const navigation = useNavigation();
+  const user = useUserStore(state => state.user);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const user = auth().currentUser;
-      // NavigationService.replace('Login');
       if (user) {
-        NavigationService.replace('Home');
+        NavigationService.replace('MainStack');
       } else {
         NavigationService.replace('Login');
       }
     }, 1500); // giả delay như splash animation
 
     return () => clearTimeout(timer);
-  }, []);
-  console.log('RunningCommunityScreen loaded');
+  }, [user]);
+
   return (
     <View style={tw.style('flex-1 bg-black')}>
       <ImageBackground

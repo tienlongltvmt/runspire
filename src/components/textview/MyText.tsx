@@ -16,7 +16,7 @@ export function MyText(props: IMyTextProps) {
   return (
     <Text
       {...props}
-      style={[tw.style('text-black text-sm'), style]}
+      style={[tw.style('text-black text-sm font-mono'), style]}
       allowFontScaling={false}>
       {children}
     </Text>
