@@ -23,7 +23,7 @@ export default function AppNavigator() {
           screenOptions={{
             // animation: 'fade',
             headerTintColor: '#3A4D39',
-            headerBackVisible: false,
+            headerBackButtonDisplayMode: 'minimal',
           }}>
           <RootStack.Screen
             name="Splash"
@@ -50,7 +50,8 @@ export default function AppNavigator() {
             name="CreatedPostCommunity"
             component={CreatedPostCommunity}
             options={{
-              headerShown: false,
+              // headerShown: false,
+              headerTitle: 'Created Post',
             }}
           />
         </RootStack.Navigator>

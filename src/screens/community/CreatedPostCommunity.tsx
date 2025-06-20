@@ -105,8 +105,6 @@ const CreatedPostCommunity = () => {
       <ScrollView
         style={tw.style('flex-1')}
         showsVerticalScrollIndicator={false}>
-        <Text style={tw.style('text-xl font-bold mb-4')}>Created Post</Text>
-
         {/* Caption */}
         <MyText style={tw.style('mb-1')}>Caption:</MyText>
         <TextInput
