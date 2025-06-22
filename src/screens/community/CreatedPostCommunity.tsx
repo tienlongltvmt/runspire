@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {
   TextInput,
-  Text,
   TouchableOpacity,
   Image,
   Alert,
@@ -158,9 +157,9 @@ const CreatedPostCommunity = () => {
       <TouchableOpacity
         onPress={handlePost}
         style={tw.style('bg-blue-500 py-3 rounded-lg')}>
-        <Text style={tw.style('text-white text-center font-bold text-lg')}>
+        <MyText style={tw.style('text-white text-center font-bold text-lg')}>
           Đăng bài
-        </Text>
+        </MyText>
       </TouchableOpacity>
     </SafeAreaView>
   );

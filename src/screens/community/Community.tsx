@@ -6,10 +6,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   RefreshControl,
-  Alert,
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
 import {MyIcon} from '@components/icon/MyIcon';
 import NavigationService from '@navigation/NavigationService';
 import tw from '@utils/tailwind';
@@ -58,6 +56,7 @@ const Community = () => {
       ) : (
         <FlatList
           data={posts}
+          showsVerticalScrollIndicator={false}
           keyExtractor={item => item.id}
           renderItem={({item}: {item: Post}) => <PostCard post={item} />}
           refreshControl={

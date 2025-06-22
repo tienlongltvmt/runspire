@@ -1,14 +1,14 @@
 import NavigationService from '@navigation/NavigationService';
 import {AuthService} from '@services/AuthService';
 import React from 'react';
-import {View, Alert, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Alert, TouchableOpacity} from 'react-native';
 import {useUserStore} from '@store/userStore';
 import tw from '@utils/tailwind';
 import {SvgXml} from 'react-native-svg';
 import {logo_google} from '@assets/icons/svg';
 import {MyText} from '@components/textview/MyText';
 
-export default function LoginScreen({navigation}: any) {
+export default function LoginScreen() {
   const {setUser} = useUserStore();
 
   const handleGoogleLogin = async () => {
@@ -16,20 +16,20 @@ export default function LoginScreen({navigation}: any) {
       const reqUser = await AuthService.signInWithGoogle();
       setUser(reqUser);
 
-      NavigationService.replace('Home');
+      NavigationService.replace('MainStack');
     } catch (error) {
       Alert.alert('Google Login Error', String(error));
     }
   };
 
-  const handleFacebookLogin = async () => {
-    try {
-      await AuthService.signInWithFacebook();
-      navigation.replace('Home');
-    } catch (error) {
-      Alert.alert('Facebook Login Error', String(error));
-    }
-  };
+  // const handleFacebookLogin = async () => {
+  //   try {
+  //     await AuthService.signInWithFacebook();
+  //     navigation.replace('Home');
+  //   } catch (error) {
+  //     Alert.alert('Facebook Login Error', String(error));
+  //   }
+  // };
 
   return (
     <View style={tw.style('flex-1 justify-end p-5 bg-blue-400')}>
@@ -60,8 +60,3 @@ export default function LoginScreen({navigation}: any) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {flex: 1, justifyContent: 'center', padding: 20},
-  title: {fontSize: 20, textAlign: 'center', marginBottom: 20},
-});
